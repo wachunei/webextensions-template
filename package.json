@@ -1,0 +1,32 @@
+{
+  "name": "webextensions-template",
+  "version": "0.0.1",
+  "description": "Another WebExtensions template",
+  "main": "index.js",
+  "author": "Pedro Pablo Aste Kompen <wachunei@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "repository": "git@github.com:wachunei/webextensions-template.git",
+  "scripts": {
+    "manifest": "node src/manifest/generate",
+    "manifest:chrome": "TARGET=chrome yarn manifest",
+    "manifest:firefox": "TARGET=firefox yarn manifest",
+    "bundle": "parcel src/manifest.json",
+    "bundle:chrome": "TARGET=chrome yarn bundle",
+    "bundle:firefox": "TARGET=firefox yarn bundle",
+    "clean": "rimraf ./dist",
+    "chrome": "TARGET=chrome yarn clean && yarn manifest:chrome && yarn bundle:chrome",
+    "firefox": "TARGET=firefox yarn clean && yarn manifest:firefox && yarn bundle:firefox",
+    "run:chrome": "web-ext run -t chromium --source-dir ./dist",
+    "run:firefox": "web-ext run -t firefox-desktop --source-dir ./dist",
+    "build": "parcel build src/manifest.json --no-content-hash",
+    "build:chrome": "yarn clean && yarn manifest:chrome && TARGET=chrome yarn build",
+    "build:firefox": "yarn clean && yarn manifest:firefox && TARGET=firefox yarn build"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-web-extension": "^1.6.1",
+    "rimraf": "^3.0.2",
+    "web-ext": "^4.2.0"
+  }
+}
